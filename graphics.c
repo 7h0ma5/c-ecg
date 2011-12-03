@@ -29,11 +29,11 @@ static void display() {
 
 void graphics_frequency(int freq) {
   freq_buffer[time++ % WIDTH] = freq;
+  glutPostRedisplay();
 }
 
 void graphics_loop() {
   glutMainLoop();
-  glutPostRedisplay();
 }
 
 void graphics_init(int argc, char** argv) {
