@@ -3,6 +3,7 @@
 #else
   #include <GL/glut.h>
 #endif
+
 #include "string.h"
 #include "audio.h"
 #include "graphics.h"
@@ -11,10 +12,10 @@
 #define HEIGHT 300
 
 int freq_buffer[WIDTH];
+int time = 0;
 
-void display() {
+static void display() {
   glClear(GL_COLOR_BUFFER_BIT);
-
   glBegin(GL_LINES);
   glColor4f(1.0, 0.0, 0.0, 1.0);
   for (int i = 1; i < WIDTH; i++) {
@@ -26,14 +27,13 @@ void display() {
   glutSwapBuffers();
 }
 
-void tick(int time) {
-  glutTimerFunc(10, tick, time+1);
-  freq_buffer[time%WIDTH] = audio_read();
-  if (time % 5 == 0) glutPostRedisplay();
+void graphics_frequency(int freq) {
+  freq_buffer[time++ % WIDTH] = freq;
 }
 
 void graphics_loop() {
   glutMainLoop();
+  glutPostRedisplay();
 }
 
 void graphics_init(int argc, char** argv) {
@@ -43,7 +43,6 @@ void graphics_init(int argc, char** argv) {
   glutCreateWindow("ecg");
 
   glutDisplayFunc(display);
-  glutTimerFunc(10, tick, 0);
 
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();

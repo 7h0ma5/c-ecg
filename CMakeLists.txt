@@ -3,7 +3,6 @@ cmake_minimum_required(VERSION 2.8)
 
 find_package(GLUT)
 find_package(OpenGL)
-find_package(ALSA)
 
 set(CMAKE_C_FLAGS "-Wall -std=c99")
 
@@ -14,4 +13,4 @@ add_executable(ecg
     analyze.c
 )
 
-target_link_libraries(ecg ${ALSA_LIBRARY} ${GLUT_LIBRARY} ${OPENGL_LIBRARY})
+target_link_libraries(ecg portaudio ${GLUT_LIBRARY} ${OPENGL_LIBRARY})
