@@ -24,5 +24,5 @@ int find_frequency(int data[], int samples){
     }
   }
 
-  return (1.0f/(((float)sum/(float)j)/44100.0f))/64.0f;
+  return 1.0f/(((float)sum/(float)j)/44100.0f);
 }

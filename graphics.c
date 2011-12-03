@@ -28,8 +28,9 @@ static void display() {
 }
 
 void graphics_frequency(int freq) {
-  freq_buffer[time++ % WIDTH] = freq;
-  glutPostRedisplay();
+  int f = freq;
+  f = HEIGHT-((int)(((double)freq-3700.0)/10.0));
+  freq_buffer[time++ % WIDTH] = f;
 }
 
 void graphics_loop() {
@@ -43,6 +44,7 @@ void graphics_init(int argc, char** argv) {
   glutCreateWindow("ecg");
 
   glutDisplayFunc(display);
+  glutIdleFunc(display);
 
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
